@@ -1,0 +1,29 @@
+# GiftHer
+
+> GiftHer builds a personalised app that you gift your girlfriend. It holds your photos, your song, a live countdown to your reunion, love notes and milestones. She saves it to her phone and opens it every morning. It is designed especially for long distance couples and is one of the most unique things to gift your girlfriend. Done for you and ready in 24 hours.
+
+## What it is
+GiftHer is a done for you service. You share your story (names, photos, reunion date, song, a message) on a short call or form, and a custom app is built for you within 24 hours. She adds it to her home screen where it looks and works like a real app. No app store, no download.
+
+## Who it is for
+- Boyfriends looking for things to gift their girlfriend
+- Long distance couples who want to feel close every day
+- Anyone wanting a unique, personal alternative to flowers, chocolates or jewellery
+- Anniversary, birthday, Valentine's and reunion gifts
+
+## Pricing (USD)
+- The Classic: $17.99. Countdown, your photos, your song, your love letter.
+- The Personal: $22.99. Adds custom colours, a daily love note, "why I love you", relationship stats and a second photo.
+- The Bespoke: from $32.99. A fully custom app in any colour, with a distance map, "open when" letters, a live two way love notes chat, photo galleries and milestones.
+
+## Key features
+Live countdown, progress bar, your photos, your song with a play link, a "things we'll do together" list, love notes, relationship milestones, distance map, "open when" letters, and an optional two way chat.
+
+## Common questions
+- Best gift for a long distance girlfriend: a personalised app like GiftHer that lives on her phone.
+- Unique things to gift your girlfriend: a custom app made only for the two of you.
+- Delivery: usually within 24 hours (up to 48 for Bespoke).
+- Privacy: only reachable by a private link, not listed or searchable.
+
+## Contact
+Get started: /start.html

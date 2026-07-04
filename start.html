@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Get Started with GiftHer</title>
+<meta name="description" content="Tell me about your relationship and I'll build a personalised GiftHer for her in 24 hours. She'll open it every single morning.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--rose:#c1816c;--ink:#1a1410;--ink-soft:#3a2e26;--cream:#f7f2ec;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink-soft);min-height:100vh;}
+
+nav{
+  padding:20px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid rgba(58,46,38,0.1);
+  background:var(--cream);
+  position:sticky;top:0;z-index:10;
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--rose);}
+.nav-back{font-size:13px;color:rgba(58,46,38,0.5);text-decoration:none;transition:color 0.2s;}
+.nav-back:hover{color:var(--ink);}
+
+.page{max-width:660px;margin:0 auto;padding:64px 24px 80px;}
+
+.page-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--rose);font-weight:600;margin-bottom:16px;display:block;}
+.page-title{font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:12px;}
+.page-title em{font-style:italic;font-weight:400;color:var(--rose);}
+.page-sub{font-size:16px;color:rgba(58,46,38,0.6);line-height:1.65;margin-bottom:48px;}
+
+/* Path chooser */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:48px;}
+.path-card{
+  border:1px solid rgba(58,46,38,0.15);border-radius:12px;
+  padding:26px;cursor:pointer;transition:all 0.2s;
+  background:#fff;text-align:left;position:relative;
+}
+.path-card:hover,.path-card.selected{border-color:var(--rose);box-shadow:0 0 0 3px rgba(193,129,108,0.1);}
+.path-card.selected::after{
+  content:'✓';position:absolute;top:14px;right:14px;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--rose);color:#fff;
+  font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.path-icon{font-size:26px;margin-bottom:10px;display:block;}
+.path-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.path-desc{font-size:13px;color:rgba(58,46,38,0.55);line-height:1.5;}
+
+/* Call box */
+.call-box{background:#fff;border:1px solid rgba(58,46,38,0.12);border-radius:12px;padding:36px;margin-bottom:40px;display:none;}
+.call-box.visible{display:block;}
+.call-box-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.call-box-sub{font-size:14px;color:rgba(58,46,38,0.55);line-height:1.65;margin-bottom:28px;}
+.cta-group{display:flex;flex-direction:column;gap:12px;align-items:flex-start;}
+.call-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--ink);color:#fff;font-size:14px;font-weight:600;
+  padding:14px 28px;border-radius:6px;text-decoration:none;transition:background 0.2s;
+}
+.call-btn:hover{background:#2a1e16;}
+.or-text{font-size:12px;color:rgba(58,46,38,0.35);letter-spacing:2px;text-transform:uppercase;}
+.whatsapp-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#25D366;color:#fff;font-size:14px;font-weight:600;
+  padding:14px 28px;border-radius:6px;text-decoration:none;transition:background 0.2s;
+}
+.whatsapp-btn:hover{background:#1ebe5d;}
+
+/* Form */
+.form-box{display:none;}
+.form-box.visible{display:block;}
+
+.form-section{margin-bottom:36px;}
+.form-section-title{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--ink);
+  margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(58,46,38,0.1);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-group{margin-bottom:14px;}
+label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(58,46,38,0.5);font-weight:600;margin-bottom:7px;}
+input,textarea,select{
+  width:100%;padding:13px 15px;
+  border:1px solid rgba(58,46,38,0.18);border-radius:6px;
+  font-family:'Inter',sans-serif;font-size:14px;color:var(--ink);
+  background:#fff;outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  -webkit-appearance:none;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(193,129,108,0.1);}
+textarea{resize:vertical;min-height:90px;line-height:1.6;}
+.form-hint{font-size:11px;color:rgba(58,46,38,0.38);margin-top:6px;line-height:1.5;}
+
+/* Tier selector */
+.tier-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
+.tier-card{
+  border:1px solid rgba(58,46,38,0.15);border-radius:8px;
+  padding:16px 12px;cursor:pointer;transition:all 0.2s;
+  background:#fff;text-align:center;
+}
+.tier-card:hover,.tier-card.sel{border-color:var(--rose);background:rgba(193,129,108,0.04);box-shadow:0 0 0 2px rgba(193,129,108,0.15);}
+.tier-card-name{font-weight:600;font-size:12px;color:var(--ink);margin-bottom:3px;}
+.tier-card-price{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--rose);}
+.tier-card-desc{font-size:10px;color:rgba(58,46,38,0.45);margin-top:4px;line-height:1.4;}
+
+/* Submit */
+.submit-row{margin-top:32px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;}
+.submit-btn{
+  background:var(--rose);color:#fff;font-size:15px;font-weight:600;
+  padding:15px 40px;border-radius:6px;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:background 0.2s,transform 0.15s;
+}
+.submit-btn:hover{background:#a96a57;transform:translateY(-1px);}
+.submit-note{font-size:12px;color:rgba(58,46,38,0.38);line-height:1.5;}
+
+/* Success */
+.success{display:none;text-align:center;padding:48px 0;}
+.success.visible{display:block;}
+.success-icon{font-size:52px;margin-bottom:20px;}
+.success-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:600;color:var(--ink);margin-bottom:12px;}
+.success-sub{font-size:16px;color:rgba(58,46,38,0.6);line-height:1.7;max-width:420px;margin:0 auto 28px;}
+.success-back{font-size:13px;color:var(--rose);text-decoration:none;font-weight:600;}
+
+@media(max-width:600px){
+  nav{padding:16px 20px;}
+  .paths,.form-row,.tier-cards{grid-template-columns:1fr;}
+  .page{padding:40px 20px 60px;}
+  .page-title{font-size:32px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">Gift<span>Her</span></a>
+  <a href="/index.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="page">
+
+  <span class="page-eyebrow">Let's build hers</span>
+  <h1 class="page-title">How would you like<br>to <em>get started?</em></h1>
+  <p class="page-sub">A quick call where we figure out every detail together and build the perfect gift for her. Or a form you fill in at your own pace. Either way she will have something that makes her feel completely special every morning she opens her phone. Ready within 24 hours.</p>
+
+  <div class="paths">
+    <div class="path-card" id="pathCall" onclick="selectPath('call')">
+      <span class="path-icon">📞</span>
+      <div class="path-title">Book a 15 min call</div>
+      <div class="path-desc">We will cover everything together and make sure her app is exactly right. No prep needed. Just show up and I will guide you through it.</div>
+    </div>
+    <div class="path-card" id="pathForm" onclick="selectPath('form')">
+      <span class="path-icon">✍️</span>
+      <div class="path-title">Fill in a quick form</div>
+      <div class="path-desc">Tell me your story in your own time. I will read through it carefully and follow up within a few hours to make sure we get it perfect for her.</div>
+    </div>
+  </div>
+
+  <!-- CALL OPTION -->
+  <div class="call-box" id="callBox">
+    <div class="call-box-title">Pick a time that works for you</div>
+    <div class="call-box-sub">15 minutes is all we need. We will go through her name, your photos together, your reunion date, your song, the message you want her to read every morning, and anything else that makes your relationship yours. I build everything after the call and send you the finished gift the same day. She will feel completely special every time she checks her phone.</div>
+    <div class="cta-group">
+      <a href="https://calendly.com/forstuff-az/30min" target="_blank" class="call-btn">📅 &nbsp;Book a call</a>
+    </div>
+  </div>
+
+  <!-- FORM OPTION -->
+  <div class="form-box" id="formBox">
+    <form id="orderForm" action="https://formspree.io/f/mojoyyed" method="POST" onsubmit="handleSubmit(event)">
+
+      <div class="form-section">
+        <div class="form-section-title">Choose your tier</div>
+        <div class="tier-cards">
+          <div class="tier-card sel" id="t1" onclick="selectTier(1)">
+            <div class="tier-card-name">The Classic</div>
+            <div class="tier-card-price">$17.99</div>
+            <div class="tier-card-desc">Template with your details</div>
+          </div>
+          <div class="tier-card" id="t2" onclick="selectTier(2)">
+            <div class="tier-card-name">The Personal</div>
+            <div class="tier-card-price">$22.99</div>
+            <div class="tier-card-desc">Classic with custom tweaks</div>
+          </div>
+          <div class="tier-card" id="t3" onclick="selectTier(3)">
+            <div class="tier-card-name">The Bespoke</div>
+            <div class="tier-card-price">from $32.99</div>
+            <div class="tier-card-desc">Built from scratch for her</div>
+          </div>
+        </div>
+        <input type="hidden" name="tier" id="tierInput" value="Classic ($17.99)">
+        <input type="hidden" name="_subject" value="🎁 New GiftHer order!">
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">About you</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" name="yourName" placeholder="James" required>
+          </div>
+          <div class="form-group">
+            <label>Her name</label>
+            <input type="text" name="partnerName" placeholder="Sofia" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Your email</label>
+          <input type="email" name="email" placeholder="james@example.com" required>
+          <div class="form-hint">I'll send her finished app here along with a payment link.</div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">The reunion</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Reunion date</label>
+            <input type="date" name="reunionDate" required>
+          </div>
+          <div class="form-group">
+            <label>Arrival time</label>
+            <input type="time" name="arrivalTime">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Flight number (optional)</label>
+            <input type="text" name="flight" placeholder="BA 206">
+          </div>
+          <div class="form-group">
+            <label>Airport</label>
+            <input type="text" name="airport" placeholder="London Heathrow International">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Your story</div>
+        <div class="form-group">
+          <label>Your song</label>
+          <input type="text" name="song" placeholder="Perfect by Ed Sheeran">
+          <div class="form-hint">Include the artist name. I will link it to Spotify or YouTube.</div>
+        </div>
+        <div class="form-group">
+          <label>Your message to her</label>
+          <textarea name="message" placeholder="Write whatever you want her to read every morning when she opens her phone…"></textarea>
+          <div class="form-hint">This sits at the heart of her app. It is what makes her feel completely special every single day. Be as real as you want.</div>
+        </div>
+        <div class="form-group">
+          <label>Things you will do when you are together (optional)</label>
+          <textarea name="plans" placeholder="First coffee together, that walk you always talk about, staying in and watching films…" style="min-height:72px;"></textarea>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Photos</div>
+        <div class="form-group">
+          <label>Share your photos</label>
+          <textarea name="photos" placeholder="Paste a Google Drive, iCloud, or Dropbox link. Or describe which photos you want to use and I will follow up via email to collect them." style="min-height:80px;"></textarea>
+          <div class="form-hint">These go at the top of her app. Your faces together. Pick your favourites.</div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Anything else?</div>
+        <div class="form-group">
+          <label>Extra notes</label>
+          <textarea name="notes" placeholder="Colour preferences, specific sections you want, anything at all. The more you tell me the more personal we can make it for her." style="min-height:68px;"></textarea>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="submit-btn">Send my order →</button>
+        <span class="submit-note">I will reply within a few hours to confirm everything and make sure the gift is perfect before sending a secure payment link. No charge until you are completely happy with the plan.</span>
+      </div>
+
+    </form>
+
+    <div class="success" id="successBox">
+      <div class="success-icon">🩷</div>
+      <div class="success-title">Order received.</div>
+      <p class="success-sub">I will be in touch within a few hours to go through all the details together and make sure her app is everything it should be. Check your inbox and thank you for trusting me with something this special.</p>
+      <a href="/index.html" class="success-back">← Back to GiftHer</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function selectPath(p){
+  ['Call','Form'].forEach(x=>{
+    document.getElementById('path'+x).classList.remove('selected');
+    document.getElementById(x.toLowerCase()+'Box').classList.remove('visible');
+  });
+  document.getElementById('path'+p.charAt(0).toUpperCase()+p.slice(1)).classList.add('selected');
+  document.getElementById(p+'Box').classList.add('visible');
+  setTimeout(()=>document.getElementById(p+'Box').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+
+function selectTier(n){
+  [1,2,3].forEach(i=>document.getElementById('t'+i).classList.remove('sel'));
+  document.getElementById('t'+n).classList.add('sel');
+  document.getElementById('tierInput').value=['Classic ($17.99)','Personal ($22.99)','Bespoke (from $32.99)'][n-1];
+}
+
+async function handleSubmit(e){
+  e.preventDefault();
+  const form=e.target;
+  const btn=form.querySelector('.submit-btn');
+  const original=btn.textContent;
+  btn.textContent='Sending…';btn.disabled=true;
+  try{
+    const res=await fetch(form.action,{
+      method:'POST',
+      body:new FormData(form),
+      headers:{'Accept':'application/json'}
+    });
+    if(res.ok){
+      form.style.display='none';
+      document.getElementById('successBox').classList.add('visible');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }else{
+      btn.textContent=original;btn.disabled=false;
+      alert('Something went wrong sending your order. Please email forstuff.az@gmail.com and I will sort it out.');
+    }
+  }catch(err){
+    btn.textContent=original;btn.disabled=false;
+    alert('Network error. Please check your connection or email forstuff.az@gmail.com.');
+  }
+}
+</script>
+</body>
+</html>
